@@ -15,7 +15,7 @@
     - Replace `WEBHOOK_URL` to your discord webhook `url`
 
 
-## ONLY FOR EDUCATIONAL PURPOSES 
+## ⚠️ FOR EDUCATION PURPOSES ONLY ⚠️ 
 
 
 
