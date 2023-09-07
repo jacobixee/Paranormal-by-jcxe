@@ -9,13 +9,13 @@
     - Sends data to discord webhook
 
 ## Requires (also on victim's PC):
-    - `PiP`
-    - `Python`
-    - `Windows`
+    - PiP
+    - Python
+    - Windows
 
-## How to configure:
+ How to configure:
     - Edit `main.py`
-    - Replace `WEBHOOK_URL` to your discord webhook `url`
+    - Replace `WEBHOOK_URL` to your `discord webhook url`
 
 
 
