@@ -12,7 +12,9 @@
     - `Windows`
 
 ## How to configure:
+    - Edit `main.py`
     - Replace `WEBHOOK_URL` to your discord webhook `url`
+
 
 
 ## ⚠️ FOR EDUCATION PURPOSES ONLY ⚠️ 
