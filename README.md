@@ -7,6 +7,7 @@
     - Getting saved WIFI's SSID and Passwords
     - Easy Configuration
     - Sends data to discord webhook
+    -adding RAT to autostart
 
 ## Requires (also on victim's PC):
     - PiP
@@ -16,6 +17,8 @@
 ## How to configure: 
     - Edit `main.py`
     - Replace `WEBHOOK_URL` to your `discord webhook url`
+
+    - To start use main.bat
 
 
 
